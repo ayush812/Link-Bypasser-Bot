@@ -659,14 +659,14 @@ def getfirst(url):
 def ez4(url):
     client = cloudscraper.create_scraper(allow_brotli=False)
     DOMAIN = "https://ez4short.com"
-    ref = "https://techmody.io/"
+    ref = "https://ez4mods.com"
     h = {"referer": ref}
     resp = client.get(url,headers=h)
     soup = BeautifulSoup(resp.content, "html.parser")
     inputs = soup.find_all("input")
     data = { input.get('name'): input.get('value') for input in inputs }
     h = { "x-requested-with": "XMLHttpRequest" }
-    time.sleep(8)
+    time.sleep(3)
     r = client.post(f"{DOMAIN}/links/go", data=data, headers=h)
     try: return r.json()['url']
     except: return "Something went wrong :("
