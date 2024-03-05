@@ -173,11 +173,11 @@ def shortner_quick_api(link):
 
 def tnlink(url):
     client = requests.session()
-    DOMAIN = "https://page.tnlink.in/"
+    DOMAIN = "https://go.tnshort.net"
     url = url[:-1] if url[-1] == '/' else url
     code = url.split("/")[-1]
     final_url = f"{DOMAIN}/{code}"
-    ref = "https://usanewstoday.club/"
+    ref = "https://jrlinks.in"
     h = {"referer": ref}
     while len(client.cookies) == 0:
         resp = client.get(final_url,headers=h)
@@ -186,7 +186,7 @@ def tnlink(url):
     inputs = soup.find_all("input")
     data = { input.get('name'): input.get('value') for input in inputs }
     h = { "x-requested-with": "XMLHttpRequest" }
-    time.sleep(8)
+    time.sleep(1)
     r = client.post(f"{DOMAIN}/links/go", data=data, headers=h)
     try: return r.json()['url']
     except: return "Something went wrong :("
@@ -2323,7 +2323,7 @@ def shortners(url):
         return adrinolink(url)
     
     # tnlink
-    elif "https://link.tnlink.in/" in url:
+    elif "https://link.tnlink.in/" in url or "https://teamsilent.in/short" in url:
         print("entered tnlink: ",url)
         return tnlink(url)
 
